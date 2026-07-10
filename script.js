@@ -11,5 +11,10 @@ document.getElementById("upload").addEventListener("change", function(e) {
         canvas.height = img.height / 2;
 
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // download link
+        const link = document.getElementById("download");
+        link.href = canvas.toDataURL("image/jpeg", 0.7);
+        link.innerText = "Download Compressed Image";
     }
 });
