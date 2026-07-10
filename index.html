@@ -1,21 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Image Compressor</title>
+    <title>Pro Image Compressor</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f2f2f2;
+        }
+
+        .box {
+            border: 2px dashed #aaa;
+            padding: 20px;
+            margin: 20px;
+            background: white;
+        }
+
+        img {
+            max-width: 90%;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: green;
+            color: white;
+            border: none;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Image Compressor</h1>
+<h1>🔥 Pro Image Compressor</h1>
 
-<input type="file" id="upload">
+<div class="box" id="drop">
+    Drag & Drop Image Here <br><br>
+    <input type="file" id="upload">
+</div>
+
+<br>
+
+<label>Quality: </label>
+<input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.7">
+
+<p>Before</p>
+<img id="before">
+
+<p>After</p>
+<canvas id="canvas"></canvas>
 
 <br><br>
 
-<canvas id="canvas" style="border:1px solid black;"></canvas>
-
-<br><br>
-
-<a id="download" download="compressed.jpg">Download Image</a>
+<a id="download">
+    <button>Download</button>
+</a>
 
 <script src="script.js"></script>
 
