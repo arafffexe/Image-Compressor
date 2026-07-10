@@ -12,9 +12,14 @@ document.getElementById("upload").addEventListener("change", function(e) {
 
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-        // download link
         const link = document.getElementById("download");
-        link.href = canvas.toDataURL("image/jpeg", 0.7);
-        link.innerText = "Download Compressed Image";
+
+        // convert to blob (better for mobile)
+        canvas.toBlob(function(blob) {
+            const url = URL.createObjectURL(blob);
+            link.href = url;
+            link.download = "compressed.jpg";
+            link.innerText = "Download Compressed Image";
+        }, "image/jpeg", 0.7);
     }
 });
