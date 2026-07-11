@@ -1,61 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Free Image Compressor Online (No Upload Needed)</title>
-    <style>
-        body {
-            font-family: Arial;
-            text-align: center;
-            background: #f2f2f2;
-        }
+  <title>Free Image Compressor Online</title>
 
-        .box {
-            border: 2px dashed #aaa;
-            padding: 20px;
-            margin: 20px;
-            background: white;
-        }
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #f4f4f4;
+      margin: 0;
+    }
 
-        img {
-            max-width: 90%;
-            margin-top: 10px;
-        }
+    .header {
+      background: #4CAF50;
+      color: white;
+      padding: 20px;
+    }
 
-        button {
-            padding: 10px 20px;
-            background: green;
-            color: white;
-            border: none;
-        }
-    </style>
+    .container {
+      margin-top: 50px;
+    }
+
+    input {
+      padding: 10px;
+      margin: 10px;
+    }
+
+    button {
+      padding: 12px 25px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    .footer {
+      margin-top: 50px;
+      padding: 10px;
+      background: #222;
+      color: white;
+    }
+
+    a {
+      color: lightblue;
+      margin: 5px;
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>🔥 Pro Image Compressor</h1>
+  <div class="header">
+    <h1>Free Image Compressor</h1>
+    <p>Compress your images instantly 🚀</p>
+  </div>
 
-<div class="box" id="drop">
-    Drag & Drop Image Here <br><br>
+  <div class="container">
     <input type="file" id="upload">
-</div>
+    <br>
+    <button onclick="compressImage()">Compress Image</button>
+    <br><br>
+    <a id="download" style="display:none;">Download</a>
+  </div>
 
-<br>
+  <div class="footer">
+    <a href="#">Privacy</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
 
-<label>Quality: </label>
-<input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.7">
+<script>
+function compressImage() {
+  const file = document.getElementById("upload").files[0];
+  if (!file) return alert("Upload image first!");
 
-<p>Before</p>
-<img id="before">
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.src = e.target.result;
 
-<p>After</p>
-<canvas id="canvas"></canvas>
+    img.onload = function() {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
 
-<br><br>
+      canvas.width = img.width;
+      canvas.height = img.height;
 
-<a id="download">
-    <button>Download</button>
-</a>
+      ctx.drawImage(img, 0, 0);
 
-<script src="script.js"></script>
+      const compressed = canvas.toDataURL("image/jpeg", 0.5);
+
+      const download = document.getElementById("download");
+      download.href = compressed;
+      download.download = "compressed.jpg";
+      download.style.display = "inline";
+      download.innerText = "Download Image";
+    }
+  }
+  reader.readAsDataURL(file);
+}
+</script>
 
 </body>
 </html>
